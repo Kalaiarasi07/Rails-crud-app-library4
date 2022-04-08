@@ -1,0 +1,7 @@
+<h1><%= @subject.name -%></h1>
+<%= flash[:alert]%>
+<ul>
+   <% @subject.books.each do |c| %>
+   <li><%= link_to c.title, book_path(c.id)%></li>
+   <% end %>
+</ul>

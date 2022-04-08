@@ -1,0 +1,27 @@
+<% if @books.blank? %>
+<p>There no books in the library currently.</p>
+<% else %>
+
+<ul id = "subjects">
+   <% Subject.all.each do |c| %>
+   <li><%= link_to c.name, :action => "show_subjects", :id => c.id %> </li>
+   <% end %>
+</ul>
+
+<p>Available books</p>
+
+<ul id = "books">
+
+  <%= flash[:alert]%>
+
+   <% @books.each do |book| %>
+   <li>
+        <%= link_to book.title, book_path(book.id) %>
+        <b> <%= link_to 'Edit', edit_book_path(book.id) %></b>   
+        <b> <%= link_to "delete", book_path(book.id), data: {"turbo-method": :delete} %> </b>  
+    </li>
+   <% end %>
+</ul>
+
+<% end %>
+<p><%= link_to "Add new Book", new_book_path %></p>
